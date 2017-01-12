@@ -37,7 +37,7 @@
  */
 
 use DOMDocument;
-
+use angelleye\PayPal\Auth\Oauth\AuthSignature;
 class Adaptive extends PayPal
 {
 	var $DeveloperAccountEmail = '';
@@ -47,6 +47,8 @@ class Adaptive extends PayPal
 	var $IPAddress = '';
 	var $DetailLevel = '';
 	var $ErrorLanguage = '';
+        var $AccessToken = '';
+        var $TokenSecret = '';
 
 	/**
 	 * Constructor
@@ -75,6 +77,8 @@ class Adaptive extends PayPal
 			$this -> APIPassword = isset($DataArray['APIPassword']) && $DataArray['APIPassword'] != '' ? $DataArray['APIPassword'] : '';
 			$this -> APISignature = isset($DataArray['APISignature']) && $DataArray['APISignature'] != '' ? $DataArray['APISignature'] : '';
 			$this -> EndPointURL = isset($DataArray['EndPointURL']) && $DataArray['EndPointURL'] != '' ? $DataArray['EndPointURL'] : 'https://svcs.sandbox.paypal.com/';
+                        $this -> AccessToken = isset($DataArray['AccessToken']) && $DataArray['AccessToken'] != '' ? $DataArray['AccessToken'] : '';
+                        $this -> TokenSecret = isset($DataArray['TokenSecret']) && $DataArray['TokenSecret'] != '' ? $DataArray['TokenSecret'] : '';    
 		}
 		else
 		{
@@ -84,6 +88,8 @@ class Adaptive extends PayPal
 			$this -> APIPassword = isset($DataArray['APIPassword']) && $DataArray['APIPassword'] != ''  ? $DataArray['APIPassword'] : '';
 			$this -> APISignature = isset($DataArray['APISignature']) && $DataArray['APISignature'] != ''  ? $DataArray['APISignature'] : '';
 			$this -> EndPointURL = isset($DataArray['EndPointURL']) && $DataArray['EndPointURL'] != ''  ? $DataArray['EndPointURL'] : 'https://svcs.paypal.com/';
+                        $this -> AccessToken = isset($DataArray['AccessToken']) && $DataArray['AccessToken'] != '' ? $DataArray['AccessToken'] : '';
+                        $this -> TokenSecret = isset($DataArray['TokenSecret']) && $DataArray['TokenSecret'] != '' ? $DataArray['TokenSecret'] : '';
 		}
 	}
 	
@@ -115,8 +121,11 @@ class Adaptive extends PayPal
 						'X-PAYPAL-APPLICATION-ID: ' . $this -> ApplicationID, 
 						'X-PAYPAL-DEVICE-ID: ' . $this -> DeviceID, 
 						'X-PAYPAL-DEVICE-IPADDRESS: ' . $this -> IPAddress
-						);
-		
+						);                
+                if(!empty($this->AccessToken) && !empty($this->TokenSecret)){
+                    array_push($headers, 'X-PAYPAL-AUTHORIZATION: '.$this->_generateSignature($this->APIUsername,$this->APIPassword,$this->AccessToken,$this->TokenSecret,$this->EndPointURL));
+                }
+                
 		if($this -> Sandbox)
 		{
 			array_push($headers, 'X-PAYPAL-SANDBOX-EMAIL-ADDRESS: '.$this->DeveloperAccountEmail);
@@ -127,11 +136,29 @@ class Adaptive extends PayPal
 			echo '<pre />';
 			print_r($headers);
 		}
-		
 		return $headers;
 	}
 	
-	/**
+         /**
+	 * _generateSignature Function used to generate signature for third-party payments.
+	 *
+	 * @access	private
+	 * @param	string	$apiUsername		Raw API request string.
+	 * @param	string	$apiPassword		The name of the API which you are calling.
+	 * @param	string	$accessToken	        The method in the API you're calling.
+         * @param	string	$tokenSecret	        The method in the API you're calling. 
+         * @param	string	$endpoint	        The method in the API you're calling.      
+	 * @return	string	$Response		Returns the raw HTTP response from PayPal.
+	 */
+        
+        private function  _generateSignature($apiUsername, $apiPassword, $accessToken, $tokenSecret, $endpoint){
+            $auth = new AuthSignature();
+            $result = $auth->genSign($apiUsername, $apiPassword, $accessToken, $tokenSecret, 'POST', $endpoint);
+            $result = sprintf('token=%s,signature=%s,timestamp=%s', $accessToken, $result['oauth_signature'], $result['oauth_timestamp']);
+            return $result;
+        }
+
+        /**
 	 * Send the API request to PayPal using CURL.
 	 *
 	 * @access	public

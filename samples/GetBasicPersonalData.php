@@ -14,10 +14,10 @@ $PayPalConfig = array(
 					  'APIUsername' => $api_username,
 					  'APIPassword' => $api_password,
 					  'APISignature' => $api_signature,
-					  'APISubject' => 'sandbo_1204199080_biz@angelleye.com',
-                      'PrintHeaders' => $print_headers,
-                      'LogResults' => $log_results,
-                      'LogPath' => $log_path,
+					  'APISubject' => 'tejasm-facilitator@itpathsolutions.co.in',
+                                          'PrintHeaders' => $print_headers,
+                                          'LogResults' => $log_results,
+                                          'LogPath' => $log_path,
 					);
 
 $PayPal = new angelleye\PayPal\Adaptive($PayPalConfig);

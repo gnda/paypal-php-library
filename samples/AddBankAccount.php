@@ -14,9 +14,11 @@ $PayPalConfig = array(
 					  'APIPassword' => $api_password,
 					  'APISignature' => $api_signature,
 					  'APISubject' => $api_subject,
-                      'PrintHeaders' => $print_headers, 
+                                          'PrintHeaders' => $print_headers, 
 					  'LogResults' => $log_results, 
 					  'LogPath' => $log_path,
+//                                          'AccessToken' => 'RFX9w0JSXv5YdjbCxkH29I5o6DE-pMtwgADTazAghjpFrl3Do4tmZw',
+//                                          'TokenSecret' => '2VKdKBAb533-jPsm5O-ucAb.ZmQ',
 					);
 
 $PayPal = new angelleye\PayPal\Adaptive($PayPalConfig);
