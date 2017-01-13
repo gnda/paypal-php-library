@@ -24,7 +24,7 @@ $PayPal = new angelleye\PayPal\Adaptive($PayPalConfig);
 
 // Prepare request arrays
 $SearchInvoicesFields = array(
-							'MerchantEmail' => 'sandbo_1215254764_biz@angelleye.com', 			// Required.  Email address of invoice creator.
+							'MerchantEmail' => 'tejasm-merchant@itpathsolutions.co.in', 			// Required.  Email address of invoice creator.
 							'Page' => '1', 					// Required.  Page number of result set, starting with 1
 							'PageSize' => '1'				// Required.  Number of result pages, between 1 and 100
 							);
