@@ -267,6 +267,27 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="thumbnail"> <img alt="Express Checkout Redeemed Offers" src="assets/images/express-checkout-redeemed-offers.jpg">
+                                <?php
+                                $DIR = '\express-checkout-redeemed-offers';
+                                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+                                ?>
+                                <div class="caption">
+                                    <h3> Express Checkout </h3>
+                                    <h4> Redeemed Offers </h4>
+                                    <p> Learn how to implement Express Checkout Redeemed Offers".  This includes the option for embedded payments. </p>
+                                    <p>
+                                        <a class="btn btn-primary" href="express-checkout-redeemed-offers/">Demo</a> 
+                                        <?php if ($DIR_exists) : ?>
+                                        <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a>
+                                        <?php else: ?>
+                                        <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
