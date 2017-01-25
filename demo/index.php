@@ -52,31 +52,64 @@ The sample code provided by the download buttons is pulled straight from this si
       <div class="row">
         <div class="col-md-4">
           <div class="thumbnail"> <img alt="PayPal Express Checkout Basic Integration" src="assets/images/paypal-express-checkout.jpg">
+            <?php
+                  $DIR = '\express-checkout-basic';
+                  $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express Checkout </h3>
               <h4> Basic </h4>
               <p>Here we are integrating Express Checkout without any line item details or any extra features. We obtain the user's shipping information so that we can calculate shipping and tax, but otherwise no additional data is included with this checkout demo.</p>
-              <p> <a class="btn btn-primary" href="express-checkout-basic/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-basic-demo.zip">Download Sample Code</a> </p>
+              <p> 
+                <a class="btn btn-primary" href="express-checkout-basic/">Demo</a>
+                <?php if($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-basic-demo.zip">Download Sample Code</a>
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>
+              </p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="thumbnail"> <img alt="PayPal Express Checkout Line Items Integration" src="assets/images/paypal-express-checkout-with-line-items.jpg">
+            <?php
+                $DIR = '\express-checkout-line-items';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express Checkout </h3>
               <h4> w/ Line Items </h4>
               <p> Here we expand on our basic Express Checkout demo to add individual order items to the API requests so that the data is available within PayPal's checkout review pages transaction details. </p>
-              <p> <a class="btn btn-primary" href="express-checkout-line-items/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-line-items-demo.zip">Download Sample Code</a> </p>
+              <p>
+                <a class="btn btn-primary" href="express-checkout-line-items/">Demo</a>
+                <?php if($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-line-items-demo.zip">Download Sample Code</a>
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>  
+              </p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="thumbnail"> <img alt="PayPal Express Checkout Digital Goods Integration" src="assets/images/paypal-express-checkout-digital-goods.jpg">
+           <?php
+            $DIR = '\express-checkout-digital-goods';
+            $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express Checkout </h3>
               <h4> Digital Goods </h4>
               <p> Learn how to implement digital goods (micro-processing rates) into PayPal Express Checkout.  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="express-checkout-digital-goods/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p> 
+                <a class="btn btn-primary" href="express-checkout-digital-goods/">Demo</a> 
+                <?php if ($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a>
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>  
+              </p>
             </div>
           </div>
         </div>                   
@@ -84,31 +117,64 @@ The sample code provided by the download buttons is pulled straight from this si
       <div class="row">
         <div class="col-md-4">
             <div class="thumbnail"> <img alt="Express Checkout Billing Agreement" src="assets/images/paypal-express-checkout-billing-agreement.jpg">
+            <?php
+                $DIR = '\express-checkout-billing-agreement';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express Checkout Billing Agreement </h3>
               <h4> Billing Agreement </h4>
               <p> Learn how to implement Billing Agreement into PayPal Express Checkout.  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="express-checkout-billing-agreement/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p> 
+                    <a class="btn btn-primary" href="express-checkout-billing-agreement/">Demo</a>
+                    <?php if ($DIR_exists) : ?>
+                        <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a>
+                    <?php else: ?>
+                        <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                    <?php endif; ?>
+              </p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
             <div class="thumbnail"> <img alt="Express Checkout Parallel Payments" src="assets/images/paypal-express-parrallel-payments.jpg">
+            <?php
+                $DIR = '\express-checkout-parallel-payments';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express Checkout Parallel Payments </h3>
               <h4> Parallel Payments </h4>
               <p> Learn how to implement Parallel Payments into PayPal Express Checkout.  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="express-checkout-parallel-payments/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p> 
+                <a class="btn btn-primary" href="express-checkout-parallel-payments/">Demo</a> 
+                <?php if ($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> 
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>
+              </p>
             </div>
           </div>
         </div>      
         <div class="col-md-4">
             <div class="thumbnail"> <img alt="Express checkout 3rd Party No Permissions" src="assets/images/paypal-express-3rd-party-no-permissions-required.jpg">
+            <?php
+                $DIR = '\express-checkout-3rd-party-no-permissions';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express checkout 3rd Party No Permissions </h3>
               <h4> 3rd Party No Permissions </h4>
               <p> Learn how to implement 3rd Party No Permissions into PayPal Express Checkout.  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="express-checkout-3rd-party-no-permissions/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p>
+                <a class="btn btn-primary" href="express-checkout-3rd-party-no-permissions/">Demo</a> 
+                <?php if ($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> 
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>
+              </p>              
             </div>
           </div>
         </div> 
@@ -116,31 +182,64 @@ The sample code provided by the download buttons is pulled straight from this si
       <div class="row">
         <div class="col-md-4">
             <div class="thumbnail"> <img alt="Website Payments Pro 30 Basic" src="assets/images/paypal-express-website-payments-pro-3-0.jpg">
+            <?php
+                $DIR = '\website-payments-pro-30-basic';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Website Payments Pro 30 Basic </h3>
               <h4> Website Payments Pro 30 Basic </h4>
               <p> Learn how to implement Website Payments Pro 30 Basic.  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="website-payments-pro-30-basic/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p> 
+                    <a class="btn btn-primary" href="website-payments-pro-30-basic/">Demo</a>
+                    <?php if ($DIR_exists) : ?>
+                        <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> 
+                    <?php else: ?>
+                        <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                    <?php endif; ?>
+              </p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
             <div class="thumbnail"> <img alt="Express Checkout In-Context" src="assets/images/paypal-express-checkout-in-context.jpg">
+            <?php
+                $DIR = '\express-checkout-incontext';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express Checkout In-Context </h3>
               <h4> Express Checkout In-Context </h4>
               <p> Learn how to implement Express Checkout In-Context.  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="express-checkout-incontext/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p>
+                <a class="btn btn-primary" href="express-checkout-incontext/">Demo</a> 
+                <?php if ($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a>
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>
+              </p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
             <div class="thumbnail"> <img alt="Express Checkout Recurring Payment" src="assets/images/express-checkout-recurring-payments.jpg">
+            <?php
+                $DIR = '\express-checkout-recurring-payments';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Express Checkout   </h3>
               <h4> Recurring Payments </h4>
               <p> Learn how to implement Express Checkout - Recurring Payments.  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="express-checkout-recurring-payments/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p>
+                <a class="btn btn-primary" href="express-checkout-recurring-payments/">Demo</a> 
+                <?php if ($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a>
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>
+              </p>
             </div>
           </div>
         </div>
@@ -148,11 +247,22 @@ The sample code provided by the download buttons is pulled straight from this si
       <div class="row">
         <div class="col-md-4">
             <div class="thumbnail"> <img alt="Do Express Checkout Recurring Payment" src="assets/images/do-express-checkout-recurring-payments.jpg">
+            <?php
+                $DIR = '\do-express-checkout-recurring-payments';
+                $DIR_exists = (is_dir(__DIR__ .$DIR)) ? true : false;
+            ?>
             <div class="caption">
               <h3> Do Express Checkout Payment </h3>
               <h4> Recurring Payments </h4>
               <p> Learn how to implement Do Express Checkout Recurring Payment".  This includes the option for embedded payments. </p>
-              <p> <a class="btn btn-primary" href="do-express-checkout-recurring-payments/">Demo</a> <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a> </p>
+              <p>
+                <a class="btn btn-primary" href="do-express-checkout-recurring-payments/">Demo</a> 
+                <?php if ($DIR_exists) : ?>
+                    <a class="btn btn-info" href="download/paypal-php-express-checkout-digital-goods-demo.zip">Download Sample Code</a>
+                <?php else: ?>
+                    <a class="btn btn-success" href="" target="_blank">Buy Now</a>
+                <?php endif; ?>
+              </p>
             </div>
           </div>
         </div>  
