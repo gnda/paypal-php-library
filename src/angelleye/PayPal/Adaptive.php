@@ -2492,12 +2492,22 @@ class Adaptive extends PayPal
 		$MatchCriteria = isset($GetVerifiedStatusFields['MatchCriteria']) ? $GetVerifiedStatusFields['MatchCriteria'] : '';
 		$FirstName = isset($GetVerifiedStatusFields['FirstName']) ? $GetVerifiedStatusFields['FirstName'] : '';
 		$LastName = isset($GetVerifiedStatusFields['LastName']) ? $GetVerifiedStatusFields['LastName'] : '';
-		
-		// Generate XML Request
+		$AccountIdentifierEmailAddress=isset($GetVerifiedStatusFields['AccountIdentifierEmailAddress']) ? $GetVerifiedStatusFields['AccountIdentifierEmailAddress'] : '';
+                $AccountIdentifierMobilePhoneNumber=isset($GetVerifiedStatusFields['AccountIdentifierMobilePhoneNumber']) ? $GetVerifiedStatusFields['AccountIdentifierMobilePhoneNumber'] : '';
+                $AccountIdentifierAccountId=isset($GetVerifiedStatusFields['AccountIdentifierAccountId']) ? $GetVerifiedStatusFields['AccountIdentifierAccountId'] : '';
+                
+		// Generate XML Request //4082289195  E7BTGVXBFSUAU 
 		$XMLRequest = '<?xml version="1.0" encoding="utf-8"?>';
 		$XMLRequest .= '<GetVerifiedStatusRequest xmlns="' . $this -> XMLNamespace . '">';
 		$XMLRequest .= $this -> GetXMLRequestEnvelope();
-		$XMLRequest .= $EmailAddress != '' ? '<emailAddress xmlns="">' . $EmailAddress . '</emailAddress>' : '';
+                if(empty($EmailAddress)){
+                    $XMLRequest .= $AccountIdentifierEmailAddress != '' ? '<accountIdentifier xmlns=""><emailAddress xmlns="">'.$AccountIdentifierEmailAddress.'</emailAddress></accountIdentifier>' : '';
+                    $XMLRequest .= $AccountIdentifierMobilePhoneNumber != '' ? '<accountIdentifier xmlns=""><mobilePhoneNumber xmlns="">'.$AccountIdentifierMobilePhoneNumber.'</mobilePhoneNumber></accountIdentifier>' : '';
+                    $XMLRequest .= $AccountIdentifierAccountId != '' ? '<accountIdentifier xmlns=""><accountId xmlns="">'.$AccountIdentifierAccountId.'</accountId></accountIdentifier>' : '';
+                }
+                else{
+                    $XMLRequest .= $EmailAddress != '' ? '<emailAddress xmlns="">' . $EmailAddress . '</emailAddress>' : '';
+                }
 		$XMLRequest .= $MatchCriteria != '' ? '<matchCriteria xmlns="">' . $MatchCriteria . '</matchCriteria>' : '';
 		$XMLRequest .= $FirstName != '' ? '<firstName xmlns="">' . $FirstName . '</firstName>' : '';
 		$XMLRequest .= $LastName != '' ? '<lastName xmlns="">' . $LastName . '</lastName>' : '';

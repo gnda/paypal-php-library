@@ -23,12 +23,16 @@ $PayPalConfig = array(
 $PayPal = new angelleye\PayPal\Adaptive($PayPalConfig);
 
 // Prepare request arrays
+// Please refer remarks before fillup details (https://developer.paypal.com/docs/classic/api/adaptive-accounts/GetVerifiedStatus_API_Operation/#id_remark)
 $GetVerifiedStatusFields = array(
-								'EmailAddress' => 'drew@angelleye.com', 					// Required.  The email address of the PayPal account holder.
-								'FirstName' => 'Drew', 						// The first name of the PayPal account holder.  Required if MatchCriteria is NAME
-								'LastName' => 'Angell', 						// The last name of the PayPal account holder.  Required if MatchCriteria is NAME
-								'MatchCriteria' => 'NAME'					// Required.  The criteria must be matched in addition to EmailAddress.  Currently, only NAME is supported.  Values:  NAME, NONE   To use NONE you have to be granted advanced permissions
-								);
+                            'AccountIdentifierEmailAddress' => '',                      // must be present if the emailAddress field below is not) The identifier of the PayPal account holder. The email address of the PayPal account holder. Use this emailAddress field for new integrations.
+                            'AccountIdentifierMobilePhoneNumber' => '',                 // must be present if the emailAddress field below is not) The identifier of the PayPal account holder. The mobile phone number of the PayPal account holder.
+                            'AccountIdentifierAccountId' => '',                         // must be present if the emailAddress field below is not) The identifier of the PayPal account holder. The account Id of the PayPal account holder.
+                            'EmailAddress' => '', 					// must be present if the accountIdentifier field below is not) The email address of the PayPal account holder. Not recommended for future integrations. For new integrations, use the accountIdentifier field instead.
+                            'FirstName' => '', 						// The first name of the PayPal account holder.  Required if MatchCriteria is NAME
+                            'LastName' => '', 						// The last name of the PayPal account holder.  Required if MatchCriteria is NAME
+                            'MatchCriteria' => ''					// Required.  The criteria must be matched in addition to EmailAddress.  Currently, only NAME is supported.  Values:  NAME, NONE   To use NONE you have to be granted advanced permissions
+                        );
 
 $PayPalRequestData = array('GetVerifiedStatusFields' => $GetVerifiedStatusFields);
 
