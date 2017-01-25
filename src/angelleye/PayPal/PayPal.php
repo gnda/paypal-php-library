@@ -1572,7 +1572,7 @@ class PayPal
 			$n++;	
 		}
 		
-		$NVPRequest = $this->NVPCredentials . $SECFieldsNVP . $SurveyChoicesNVP . $ShippingOptionsNVP . $BillingAgreementsNVP . $PaymentsNVP;
+		$NVPRequest = $this->NVPCredentials . $SECFieldsNVP . $SurveyChoicesNVP . $ShippingOptionsNVP . $BillingAgreementsNVP . $PaymentsNVP;                
 		$NVPResponse = $this->CURLRequest($NVPRequest);
 		$NVPRequestArray = $this->NVPToArray($NVPRequest);
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
@@ -1708,7 +1708,7 @@ class PayPal
 		{
 			$DECPFieldsNVP .= $DECPFieldsVal != '' ? '&' . strtoupper($DECPFieldsVar) . '=' . urlencode($DECPFieldsVal) : '';
 		}
-		
+                               
 		// Payment Details Type Fields
 		$Payments = isset($DataArray['Payments']) ? $DataArray['Payments'] : array();
 		$n = 0;
@@ -1765,8 +1765,15 @@ class PayPal
 				}
 			}
 			$n++;
-		}	
-		
+		}
+                
+		 // Discount type fields
+		$DiscountInfoType = isset($DataArray['DiscountInfoType']) ? $DataArray['DiscountInfoType'] : array();
+		foreach($DiscountInfoType as $DiscountInfokey => $DiscountInfoval)
+		{
+			$DECPFieldsNVP .= $DiscountInfoval != '' ? '&' . strtoupper($DiscountInfokey) . '=' . urlencode($DiscountInfoval) : '';
+		}
+                
 		// User Selected Options
 		$UserSelectedOptions = isset($DataArray['UserSelectedOptions']) ? $DataArray['UserSelectedOptions'] : array();
 		foreach($UserSelectedOptions as $UserSelectedOptionVar => $UserSelectedOptionVal)
