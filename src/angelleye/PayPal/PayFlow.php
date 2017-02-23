@@ -61,9 +61,9 @@ class PayFlow extends PayPal
 		{
 			$this->APIEndPoint = 'https://payflowpro.paypal.com';
 		}
-		
-		$this->NVPCredentials = 'BUTTONSOURCE['.strlen($this->APIButtonSource).']='.$this->APIButtonSource.'&VERBOSITY['.strlen($this->Verbosity).']='.$this->Verbosity.'&USER['.strlen($this->APIUsername).']='.$this->APIUsername.'&VENDOR['.strlen($this->APIVendor).']='.$this->APIVendor.'&PARTNER['.strlen($this->APIPartner).']='.$this->APIPartner.'&PWD['.strlen($this->APIPassword).']='.$this->APIPassword;
-		
+				
+		$this->NVPCredentials = 'BUTTONSOURCE='.$this->APIButtonSource.'&VERBOSITY='.$this->Verbosity.'&USER='.$this->APIUsername.'&VENDOR='.$this->APIVendor.'&PARTNER='.$this->APIPartner.'&PWD='.$this->APIPassword;
+                
 		$this->TransactionStateCodes = array(
 				'1' => 'Error',
 				'6' => 'Settlement Pending',
@@ -189,7 +189,7 @@ class PayFlow extends PayPal
 		{
 			if($DataArrayVal != '')
 			{
-				$NVPRequest .= '&'.strtoupper($DataArrayVar).'['.strlen($DataArrayVal).']='.$DataArrayVal;
+				$NVPRequest .= '&'.strtoupper($DataArrayVar).'='.$DataArrayVal;
 			}
 		}
                 
