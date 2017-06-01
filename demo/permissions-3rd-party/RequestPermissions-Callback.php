@@ -8,19 +8,19 @@ require_once('../../autoload.php');
 require_once ('../../src/angelleye/PayPal/PPAuth.php');
 // Create PayPal object.
 $PayPalConfig = array(
-					  'Sandbox' => $sandbox,
-					  'DeveloperAccountEmail' => $developer_account_email,
-					  'ApplicationID' => $application_id,
-					  'DeviceID' => $device_id,
-					  'IPAddress' => $_SERVER['REMOTE_ADDR'],
-					  'APIUsername' => $api_username,
-					  'APIPassword' => $api_password,
-					  'APISignature' => $api_signature,
-					  'APISubject' => $api_subject,
-                                          'PrintHeaders' => $print_headers, 
-					  'LogResults' => $log_results, 
-					  'LogPath' => $log_path,
-					);
+                'Sandbox' => $sandbox,
+                'DeveloperAccountEmail' => $developer_account_email,
+                'ApplicationID' => $application_id,
+                'DeviceID' => $device_id,
+                'IPAddress' => $_SERVER['REMOTE_ADDR'],
+                'APIUsername' => $api_username,
+                'APIPassword' => $api_password,
+                'APISignature' => $api_signature,
+                'APISubject' => $api_subject,
+                'PrintHeaders' => $print_headers, 
+                'LogResults' => $log_results, 
+                'LogPath' => $log_path,
+              );
 $PayPal = new angelleye\PayPal\Adaptive($PayPalConfig);
 
 // Prepare request arrays
@@ -33,46 +33,6 @@ $PayPalRequestData = array('GetAccessTokenFields' => $GetAccessTokenFields);
 
 // Pass data into class for processing with PayPal and load the response array into $PayPalResult
 $PayPalResult = $PayPal->GetAccessToken($PayPalRequestData);
-
-$endpoint = 'https://svcs.sandbox.paypal.com/Invoice/SearchInvoices';
-$auth = new AuthSignature();
-$authResponse = $auth->genSign($api_username, $api_password, $PayPalResult['Token'], $PayPalResult['TokenSecret'], 'POST', $endpoint);
-$authString = "token=" .  $PayPalResult['Token'] . ",signature=" . $authResponse['oauth_signature'] . ",timestamp=" . $authResponse['oauth_timestamp'];
-$httpHeaders =array(                                         
-            'X-PAYPAL-SECURITY-USERID: tejasm-merchant_api2.itpathsolutions.co.in',
-            'X-PAYPAL-SECURITY-PASSWORD: GJA2TBCF3U9H4VK9',
-            'X-PAYPAL-SECURITY-SIGNATURE: AFcWxV21C7fd0v3bYYYRCpSSRl31A47TBRQKcZyw6Bx9aDcmqr9ipPmt',
-            'X-PAYPAL-SECURITY-SUBJECT: tejas-btnmgr@itpathsolutions.co.in',
-            'X-PAYPAL-REQUEST-DATA-FORMAT: NV',
-            'X-PAYPAL-RESPONSE-DATA-FORMAT: NV',
-            'X-PAYPAL-AUTHORIZATION: ' .$authString,
-            'X-PAYPAL-APPLICATION-ID:APP-80W284485P519543T'
-        );
-                
-        $info = 'requestEnvelope=en_US'
-                .'&merchantEmail=tejas-btnmgr@itpathsolutions.co.in'
-                .'&page=1'
-                .'&pageSize=1'
-                .'&parameters=""'
-                .'&VERSION=94';
-
-        $curl = curl_init('https://svcs.sandbox.paypal.com/Invoice/SearchInvoices');
-
-        curl_setopt($curl, CURLOPT_VERBOSE, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 30);                
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);                                
-        curl_setopt($curl, CURLOPT_POSTFIELDS,  $info);                                
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeaders);
-
-        $result = curl_exec($curl);
-
-        # Bust the string up into an array by the ampersand (&)
-        # You could also use parse_str(), but it would most likely limit out
-        $result = explode("&", $result);
-        echo "<pre>";
-        print_r($result);
-        exit;
 
 if(!empty($PayPalResult['Errors'])){
     echo "<h1>Please Check Below Errors.</h1>";
