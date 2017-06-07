@@ -17,7 +17,10 @@ $PayPalConfig = array(
             'APISubject' => $api_subject,
             'PrintHeaders' => TRUE,
             'LogResults' => $log_results,
-            'LogPath' => $log_path            
+            'LogPath' => $log_path,
+            'ThirdPartyPermission' => TRUE,     // This is flag that indicate true if you are using third party permission.
+            'Token' => 'TIC5Qh82dqhZN5vfxkH29I5pi-H53Y5NCnOg0We0LucDeX7u6XA9-w',  // Token that you received after granted permission from third party
+            'TokenSecret' => 'dCo1wjslmTl.tvLjiEhqClWvQlQ', // Token secret you received with the token.
         );
 
 $PayPal = new angelleye\PayPal\Adaptive($PayPalConfig);

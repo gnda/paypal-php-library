@@ -48,9 +48,9 @@ class Adaptive extends PayPal
 	var $IPAddress = '';
 	var $DetailLevel = '';
 	var $ErrorLanguage = '';
-        var $ThirdPartyPermission = '';
-        var $Token = '';
-        var $TokenSecret = '';
+        var $ThirdPartyPermission = '';  // This is flag that indicate true if you are using third party permission.
+        var $Token = '';                 // Token that you received after granted permission from third party
+        var $TokenSecret = '';           // Token secret you received with the token.   
 
 	/**
 	 * Constructor
