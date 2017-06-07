@@ -47,6 +47,9 @@ class Adaptive extends PayPal
 	var $IPAddress = '';
 	var $DetailLevel = '';
 	var $ErrorLanguage = '';
+        var $ThirdPartyPermission = '';
+        var $Token = '';
+        var $TokenSecret = '';
 
 	/**
 	 * Constructor
@@ -66,7 +69,10 @@ class Adaptive extends PayPal
 		$this->ErrorLanguage = isset($DataArray['ErrorLanguage']) ? $DataArray['ErrorLanguage'] : 'en_US';
 		$this->APISubject = isset($DataArray['APISubject']) ? $DataArray['APISubject'] : '';
 		$this->DeveloperAccountEmail = isset($DataArray['DeveloperAccountEmail']) ? $DataArray['DeveloperAccountEmail'] : '';
-
+                $this->ThirdPartyPermission = isset($DataArray['ThirdPartyPermission']) ? $DataArray['ThirdPartyPermission'] : '';
+                $this->Token = isset($DataArray['Token']) ? $DataArray['Token'] : '';
+                $this->TokenSecret = isset($DataArray['TokenSecret']) ? $DataArray['TokenSecret'] : '';
+                
 		if($this -> Sandbox)
 		{	
 			// Sandbox Credentials
