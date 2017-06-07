@@ -37,6 +37,7 @@
  */
 
 use DOMDocument;
+require_once 'PPAuth.php';
 
 class Adaptive extends PayPal
 {
@@ -108,20 +109,35 @@ class Adaptive extends PayPal
 	 * @param	boolean	$PrintHeaders	Option to output headers to the screen (true/false).
 	 * @return	string	$headers		String of HTTP headers.	
 	 */
-	function BuildHeaders($PrintHeaders)
+	function BuildHeaders($PrintHeaders,$APIName = "", $APIOperation = "")
 	{
+                if($this->ThirdPartyPermission == TRUE){
+                    
+                    $AuthObject = new \AuthSignature();
+                    $AuthResponse =  $AuthObject->genSign($this->APIUsername, $this->APIPassword, $this->Token, $this->TokenSecret , 'POST', $this -> EndPointURL . $APIName . '/' . $APIOperation);
+                    $AuthString = "token=" .  $this->Token . ",signature=" . $AuthResponse['oauth_signature'] . ",timestamp=" . $AuthResponse['oauth_timestamp'];
+                    $AuthHeaderString = 'X-PAYPAL-AUTHORIZATION: ' .$AuthString;
+                }
+                else{
+                    $AuthHeaderString = '';
+                }
+            
 		$headers = array(
-						'X-PAYPAL-SECURITY-USERID: ' . $this -> APIUsername, 
-						'X-PAYPAL-SECURITY-PASSWORD: ' . $this -> APIPassword, 
-						'X-PAYPAL-SECURITY-SIGNATURE: ' . $this -> APISignature, 
-						'X-PAYPAL-SECURITY-SUBJECT: ' . $this -> APISubject, 
-						'X-PAYPAL-REQUEST-DATA-FORMAT: XML',
-						'X-PAYPAL-RESPONSE-DATA-FORMAT: XML', 
-						'X-PAYPAL-APPLICATION-ID: ' . $this -> ApplicationID, 
-						'X-PAYPAL-DEVICE-ID: ' . $this -> DeviceID, 
-						'X-PAYPAL-DEVICE-IPADDRESS: ' . $this -> IPAddress
-						);
-		
+                            'X-PAYPAL-SECURITY-USERID: ' . $this -> APIUsername, 
+                            'X-PAYPAL-SECURITY-PASSWORD: ' . $this -> APIPassword, 
+                            'X-PAYPAL-SECURITY-SIGNATURE: ' . $this -> APISignature, 
+                            'X-PAYPAL-SECURITY-SUBJECT: ' . $this -> APISubject, 
+                            'X-PAYPAL-REQUEST-DATA-FORMAT: XML',
+                            'X-PAYPAL-RESPONSE-DATA-FORMAT: XML', 
+                            'X-PAYPAL-APPLICATION-ID: ' . $this -> ApplicationID,
+                            'X-PAYPAL-DEVICE-ID: ' . $this -> DeviceID, 
+                            'X-PAYPAL-DEVICE-IPADDRESS: ' . $this -> IPAddress
+                            );
+                
+                if(!empty($AuthHeaderString)){
+                    array_push($headers, $AuthHeaderString);
+                }
+                
 		if($this -> Sandbox)
 		{
 			array_push($headers, 'X-PAYPAL-SANDBOX-EMAIL-ADDRESS: '.$this->DeveloperAccountEmail);
@@ -148,14 +164,14 @@ class Adaptive extends PayPal
 	 */
 	function CURLRequest($Request = "", $APIName = "", $APIOperation = "", $PrintHeaders = false)
 	{
-		$curl = curl_init();
-				curl_setopt($curl, CURLOPT_VERBOSE, 1);
+                                $curl = curl_init();                                
+				curl_setopt($curl, CURLOPT_VERBOSE,true);
 				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 				curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 				curl_setopt($curl, CURLOPT_URL, $this -> EndPointURL . $APIName . '/' . $APIOperation);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $Request);
-				curl_setopt($curl, CURLOPT_HTTPHEADER, $this -> BuildHeaders($this->PrintHeaders));
+				curl_setopt($curl, CURLOPT_HTTPHEADER, $this -> BuildHeaders($this->PrintHeaders,$APIName,$APIOperation));
 								
 		if($this -> APIMode == 'Certificate')
 		{

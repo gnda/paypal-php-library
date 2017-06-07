@@ -19,8 +19,8 @@ $PayPalConfig = array(
             'LogResults' => $log_results,
             'LogPath' => $log_path,
             'ThirdPartyPermission' => TRUE,
-            'Token' => 'L3DtvMq10RtZNUdVxkH29I5pi-GfLN3a-Q2JE1eFFJp9RvppNcdwOA',
-            'TokenSecret' => 'W35QJs48uOfDehtRTvLiTAPDHkQ',
+            'Token' => 'TIC5Qh82dqhZN5vfxkH29I5pi-H53Y5NCnOg0We0LucDeX7u6XA9-w',
+            'TokenSecret' => 'dCo1wjslmTl.tvLjiEhqClWvQlQ',
         );
 
 $PayPal = new angelleye\PayPal\Adaptive($PayPalConfig);
