@@ -50,10 +50,10 @@ class PayPal
 	var $Sandbox = '';
 	var $PathToCertKeyPEM = '';
 	var $SSL = '';
-    var $PrintHeaders = '';
-    var $LogResults = '';
-    var $LogPath = '';
-	
+        var $PrintHeaders = '';
+        var $LogResults = '';
+        var $LogPath = '';
+        	
 	/**
 	 * Constructor
 	 *
@@ -79,10 +79,10 @@ class PayPal
 		$this->PathToCertKeyPEM = '/path/to/cert/pem.txt';
 		$this->SSL = isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443' ? true : false;
 		$this->APISubject = isset($DataArray['APISubject']) ? $DataArray['APISubject'] : '';
-        $this->PrintHeaders = isset($DataArray['PrintHeaders']) ? $DataArray['PrintHeaders'] : false;
-        $this->LogResults = isset($DataArray['LogResults']) ? $DataArray['LogResults'] : false;
-        $this->LogPath = isset($DataArray['LogPath']) ? $DataArray['LogPath'] : '/logs/';
-
+                $this->PrintHeaders = isset($DataArray['PrintHeaders']) ? $DataArray['PrintHeaders'] : false;
+                $this->LogResults = isset($DataArray['LogResults']) ? $DataArray['LogResults'] : false;
+                $this->LogPath = isset($DataArray['LogPath']) ? $DataArray['LogPath'] : '/logs/';
+                
 		if($this->Sandbox)
 		{
 			// Show Errors
@@ -596,8 +596,8 @@ class PayPal
 		$CurrencyCodes = array_flip($this->CurrencyCodes);
 		return $CurrencyCodes[$CurrencyCodeText];
 	}
-	
-	/**
+        
+        	/**
 	 * Send the API request to PayPal using CURL.
 	 *
 	 * @access	public
@@ -608,16 +608,16 @@ class PayPal
 	 * @return	string	$Response		Returns the raw HTTP response from PayPal.
 	 */
 	function CURLRequest($Request = "", $APIName = "", $APIOperation = "", $PrintHeaders = false)
-	{
-		$curl = curl_init();
-				// curl_setopt($curl, CURLOPT_HEADER,TRUE);
-				curl_setopt($curl, CURLOPT_VERBOSE, $this->Sandbox);
-				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-				curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-				curl_setopt($curl, CURLOPT_URL, $this->EndPointURL);
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($curl, CURLOPT_POSTFIELDS, $Request);
-				
+	{                                                                
+                $curl = curl_init();
+                // curl_setopt($curl, CURLOPT_HEADER,TRUE);
+                curl_setopt($curl, CURLOPT_VERBOSE, $this->Sandbox);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                curl_setopt($curl, CURLOPT_URL, $this->EndPointURL);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $Request);
+                	
 		if($this->APIMode == 'Certificate')
 		{
 			curl_setopt($curl, CURLOPT_SSLCERT, $this->PathToCertKeyPEM);
