@@ -78,35 +78,67 @@ class BillingAPI {
             $requestArray= clone $plan;
             $output = $plan->create($this->_api_context);
             $returnArray=$output->toArray();
+            $returnArray['REQUESTDATA']=$requestArray->toArray();
             $returnArray['RAWREQUEST']=$requestArray->toJSON();
             $returnArray['RAWRESPONSE']=$output->toJSON();
             return $returnArray;            
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=$requestArray->toArray();
+            $errorReturnArray['RAWREQUEST']=$requestArray->toJSON();
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;            
         }
     }
 
     public function get_plan($planId){
         try {
+            if(empty($planId)){
+                $errorReturnArray['ERRORS']=  array("0" => 'PlanID is required');
+                $errorReturnArray['REQUESTDATA']=array('id' => $planId);
+                $errorReturnArray['RAWREQUEST']='{id:'.$planId.'}';
+                $errorReturnArray['RAWRESPONSE']='';
+                return $errorReturnArray;
+            }
             $plan = Plan::get($planId, $this->_api_context);            
             $returnArray=$plan->toArray();
+            $returnArray['REQUESTDATA'] = array('id'=>$planId);
             $returnArray['RAWREQUEST']='{id:'.$planId.'}';
             $returnArray['RAWRESPONSE']=$plan->toJSON();
             return $returnArray;
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=array('id' => $planId);
+            $errorReturnArray['RAWREQUEST']='{id:'.$planId.'}';
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;            
         }
     }
     
     public function list_plan($parameters){
             try {
                 $planList = Plan::all(array_filter($parameters), $this->_api_context);
-                $returnArray=$planList->toArray();
-                $returnArray['RAWREQUEST']=  json_encode($parameters);
-                $returnArray['RAWRESPONSE']=$planList->toJSON();
-                return $returnArray;                
+                $planListArray = json_decode($planList->toJSON(),true);
+                if(empty($planListArray)){
+                     $errorReturnArray['ERRORS']=  array('0' => 'No Data Available');
+                     $errorReturnArray['REQUESTDATA']=$parameters;
+                     $errorReturnArray['RAWREQUEST']=json_encode($parameters);
+                     $errorReturnArray['RAWRESPONSE']='';
+                     return $errorReturnArray;
+                 }
+                 else{
+                     $returnArray=$planList->toArray();
+                     $returnArray['REQUESTDATA']=  $parameters;
+                     $returnArray['RAWREQUEST']=  json_encode($parameters);
+                     $returnArray['RAWRESPONSE']=$planList->toJSON();
+                     return $returnArray;                
+                 }                
             } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-                return $ex->getData();
+               $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+               $errorReturnArray['REQUESTDATA']=$returnArray->toArray();
+               $errorReturnArray['RAWREQUEST']=$returnArray->toJSON();
+               $errorReturnArray['RAWRESPONSE']='';
+               return $errorReturnArray;
             }        
     }
     
@@ -130,11 +162,16 @@ class BillingAPI {
             $plan = Plan::get($planId, $this->_api_context);
             
             $returnArray=$plan->toArray();
-            $returnArray['RAWREQUEST'] =$requestArray;
+            $returnArray['REQUESTDATA'] =$requestArray->toArray();
+            $returnArray['RAWREQUEST'] =$requestArray->toJSON();            
             $returnArray['RAWRESPONSE']=$plan->toJSON();
             return $returnArray;            
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=$requestArray->toArray();
+            $errorReturnArray['RAWREQUEST']=$requestArray->toJSON();
+            $errorReturnArray['RAWRESPONSE']='';
+             return $errorReturnArray;
         }
     }
     
@@ -207,7 +244,11 @@ class BillingAPI {
              $returnArray['RAWRESPONSE']=$agreement->toJSON();
              return $returnArray;            
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-           return $ex->getData();
+             $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+             $errorReturnArray['REQUESTDATA']=$requestArray->toArray();
+             $errorReturnArray['RAWREQUEST']=$requestArray->toJSON();
+             $errorReturnArray['RAWRESPONSE']='';
+             return $errorReturnArray;           
         }
     }
 
