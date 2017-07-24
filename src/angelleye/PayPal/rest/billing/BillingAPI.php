@@ -171,7 +171,7 @@ class BillingAPI {
             $errorReturnArray['REQUESTDATA']=$requestArray->toArray();
             $errorReturnArray['RAWREQUEST']=$requestArray->toJSON();
             $errorReturnArray['RAWRESPONSE']='';
-             return $errorReturnArray;
+            return $errorReturnArray;
         }
     }
     
@@ -181,11 +181,16 @@ class BillingAPI {
              $createdPlan->setId($planId);
              $result = $createdPlan->delete($this->_api_context);             
              $returnArray=$result->toArray();
+             $returnArray['REQUESTDATA'] =array('id' => $planId);
              $returnArray['RAWREQUEST']='{id:'.$planId.'}';
              $returnArray['RAWRESPONSE']=$result->toJSON();
              return $returnArray;             
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']= empty($ex->getData()) ? 'Plan ID not available.' : json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=array('id' => $planId);
+            $errorReturnArray['RAWREQUEST']='{id:'.$planId.'}';
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;
         }
     }
 
@@ -240,6 +245,7 @@ class BillingAPI {
              $requestArray= clone $agreement;
              $agreement = $agreement->create($this->_api_context);
              $returnArray=$agreement->toArray();
+             $returnArray['REQUESTDATA']=$requestArray->toArray();
              $returnArray['RAWREQUEST']=$requestArray;
              $returnArray['RAWRESPONSE']=$agreement->toJSON();
              return $returnArray;            
@@ -289,28 +295,52 @@ class BillingAPI {
             $result = $agreement->create($this->_api_context);            
             $approvalUrl = $agreement->getApprovalLink();            
             $returnArray=array('result'=>$result->toArray(),'Approval URL' => $approvalUrl);;
+            $returnArray['REQUESTDATA']=$requestArray;
             $returnArray['RAWREQUEST']=$requestArray;
             $returnArray['RAWRESPONSE']=$agreement->toJSON();
             return $returnArray;                                
         }  catch (\PayPal\Exception\PayPalConnectionException $ex) {
-           return $ex->getData();
+           $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+           $errorReturnArray['REQUESTDATA']=$requestArray->toArray();
+           $errorReturnArray['RAWREQUEST']=$requestArray->toJSON();
+           $errorReturnArray['RAWRESPONSE']='';
+           return $errorReturnArray;
         }
     }
 
     public function get_billing_agreement($agreementId){
         try {
+            if(empty($agreementId)){
+                $errorReturnArray['ERRORS']=  array("0" => 'AgreementID is required');
+                $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+                $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+                $errorReturnArray['RAWRESPONSE']='';
+                return $errorReturnArray;
+            }
             $agreement = Agreement::get($agreementId, $this->_api_context);
             $returnArray=$agreement->toArray();
+            $returnArray['REQUESTDATA']=array('id' => $agreementId);
             $returnArray['RAWREQUEST']='{id:'.$agreementId.'}';
             $returnArray['RAWRESPONSE']=$agreement->toJSON();
             return $returnArray;
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+            $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;
         }
     }
 
     public function suspend_billing_agreement($agreementId,$note){       
         try {
+            if(empty($agreementId)){
+                $errorReturnArray['ERRORS']=  array("0" => 'AgreementID is required');
+                $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+                $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+                $errorReturnArray['RAWRESPONSE']='';
+                return $errorReturnArray;
+            }
             //Create an Agreement State Descriptor, explaining the reason to suspend.
             $agreementStateDescriptor = new AgreementStateDescriptor();
             if(!empty(trim($note))){
@@ -321,17 +351,28 @@ class BillingAPI {
             $createdAgreement->suspend($agreementStateDescriptor, $this->_api_context);            
             $agreement = Agreement::get($agreementId, $this->_api_context);
             $returnArray=$agreement->toArray();
+            $returnArray['REQUESTDATA']=array('id' => $agreementId);
             $returnArray['RAWREQUEST']='{id:'.$agreementId.'}';
             $returnArray['RAWRESPONSE']=$agreement->toJSON();
             return $returnArray;            
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+            $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;
         }
     }
     
     public function reactivate_billing_agreement($agreementId,$note){
         try {
-            
+            if(empty($agreementId)){
+                $errorReturnArray['ERRORS']=  array("0" => 'AgreementID is required');
+                $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+                $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+                $errorReturnArray['RAWRESPONSE']='';
+                return $errorReturnArray;
+            }
             $agreementStateDescriptor = new AgreementStateDescriptor();
             if(!empty(trim($note))){
                 $agreementStateDescriptor->setNote($note);
@@ -341,33 +382,57 @@ class BillingAPI {
             $suspendedAgreement->reActivate($agreementStateDescriptor, $this->_api_context);            
             $agreement = Agreement::get($agreementId, $this->_api_context);
             $returnArray=$agreement->toArray();
+            $returnArray['REQUESTDATA']=array('id' => $agreementId);
             $returnArray['RAWREQUEST']='{id:'.$agreementId.'}';
             $returnArray['RAWRESPONSE']=$agreement->toJSON();
             return $returnArray;             
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']=  json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+            $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;
         }        
     }
 
     public function search_billing_transactions($agreementId,$params){                
         try {
+            if(empty($agreementId)){
+                $errorReturnArray['ERRORS']=  array("0" => 'AgreementID is required');
+                $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+                $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+                $errorReturnArray['RAWRESPONSE']='';
+                return $errorReturnArray;
+            }
             $result = Agreement::searchTransactions($agreementId, $params, $this->_api_context);
             $returnArray=$result->toArray();
+            $returnArray['REQUESTDATA']=array('id' => $agreementId);
             $returnArray['RAWREQUEST']='{id:'.$agreementId.'}';
             $returnArray['RAWRESPONSE']=$result->toJSON();
             return $returnArray;             
         }  catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']= json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+            $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;
         }                
     }
     
     public function update_billing_agreement($agreementId,$agreement){
-
+        
         if(count(array_filter($agreement['shipping_address'])) == 0){
             unset($agreement['shipping_address']);
         }
         
-        try {            
+        try {
+            if(empty($agreementId)){
+                $errorReturnArray['ERRORS']=  array("0" => 'AgreementID is required');
+                $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+                $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+                $errorReturnArray['RAWRESPONSE']='';
+                return $errorReturnArray;
+            }
             $patch = new Patch();
             $patch->setOp('replace')
                 ->setPath('/')
@@ -382,18 +447,29 @@ class BillingAPI {
             $createdAgreement->update($patchRequest, $this->_api_context);            
             $agreement = Agreement::get($agreementId, $this->_api_context);            
             $returnArray=$agreement->toArray();
+            $returnArray['REQUESTDATA']=$requestArray->toArray();
             $returnArray['RAWREQUEST']=$requestArray;
             $returnArray['RAWRESPONSE']=$agreement->toJSON();
             return $returnArray;            
             
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']= json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=$requestArray->toArray();
+            $errorReturnArray['RAWREQUEST']=$requestArray->toJSON();
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;
         }
     }
 
     public function cancel_billing_agreement($agreementId,$note){
         try {
-            
+            if(empty($agreementId)){
+                $errorReturnArray['ERRORS']=  array("0" => 'AgreementID is required');
+                $errorReturnArray['REQUESTDATA']=array('id' => $agreementId);
+                $errorReturnArray['RAWREQUEST']='{id:'.$agreementId.'}';
+                $errorReturnArray['RAWRESPONSE']='';
+                return $errorReturnArray;
+            }
             $agreementStateDescriptor = new AgreementStateDescriptor();
             if(!empty(trim($note))){
                 $agreementStateDescriptor->setNote($note);
@@ -404,11 +480,16 @@ class BillingAPI {
             $calcelAgreement->cancel($agreementStateDescriptor, $this->_api_context);            
             $agreement = Agreement::get($agreementId, $this->_api_context);
             $returnArray=$agreement->toArray();
+            $returnArray['REQUESTDATA']=$requestArray;
             $returnArray['RAWREQUEST']=$requestArray;
             $returnArray['RAWRESPONSE']=$agreement->toJSON();
             return $returnArray;            
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-            return $ex->getData();
+            $errorReturnArray['ERRORS']= json_decode($ex->getData(),true);
+            $errorReturnArray['REQUESTDATA']=$requestArray->toArray();
+            $errorReturnArray['RAWREQUEST']=$requestArray->toJSON();
+            $errorReturnArray['RAWRESPONSE']='';
+            return $errorReturnArray;
         }        
     }
 
