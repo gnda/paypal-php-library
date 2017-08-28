@@ -1029,7 +1029,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $DCFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1039,7 +1039,7 @@ class PayPal
 		
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
 		$NVPResponseArray['ERRORS'] = $Errors;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
         return $NVPResponseArray;
@@ -1067,7 +1067,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $DAFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1077,7 +1077,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 									
 		return $NVPResponseArray;	
@@ -1106,7 +1106,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $DRFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1116,7 +1116,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 									
 		return $NVPResponseArray;	
@@ -1149,7 +1149,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $UAFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1159,7 +1159,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 									
 		return $NVPResponseArray;	
@@ -1185,7 +1185,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $DVFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1195,7 +1195,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 									
 		return $NVPResponseArray;	
@@ -1237,7 +1237,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $MPFieldsNVP . $MPItemsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1247,7 +1247,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 									
 		return $NVPResponseArray;
@@ -1295,7 +1295,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $RTFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1305,7 +1305,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 									
 		return $NVPResponseArray;
@@ -1332,7 +1332,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $GTDFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1344,7 +1344,7 @@ class PayPal
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['ORDERITEMS'] = $OrderItems;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -1446,7 +1446,7 @@ class PayPal
 		// Now that we have each chunk we need to go ahead and append them all together for our entire NVP string
 		$NVPRequest = $this->NVPCredentials . $DPFieldsNVP . $CCDetailsNVP . $PayerInfoNVP . $PayerNameNVP . $BillingAddressNVP . $PaymentDetailsNVP . $OrderItemsNVP . $ShippingAddressNVP . $Secure3DNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1456,7 +1456,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 				
 		return $NVPResponseArray;
@@ -1574,7 +1574,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $SECFieldsNVP . $SurveyChoicesNVP . $ShippingOptionsNVP . $BillingAgreementsNVP . $PaymentsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1598,7 +1598,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 				
 		return $NVPResponseArray;
@@ -1663,7 +1663,7 @@ class PayPal
 			
 		$NVPRequest = $this->NVPCredentials . $GECDFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1677,7 +1677,7 @@ class PayPal
 		$NVPResponseArray['ORDERITEMS'] = $OrderItems;
 		$NVPResponseArray['PAYMENTS'] = $Payments;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 				
 		return $NVPResponseArray;
@@ -1777,7 +1777,7 @@ class PayPal
 		$NVPRequest = $this->NVPCredentials . $DECPFieldsNVP . $PaymentsNVP . $UserSelectedOptionsNVP;
                 $this->MaskAPIResult($NVPRequest);
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1844,7 +1844,7 @@ class PayPal
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['PAYMENTS'] = $Payments;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 		
 		return $NVPResponseArray;
@@ -1881,7 +1881,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $TSFieldsNVP . $PayerNameNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1924,7 +1924,7 @@ class PayPal
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['SEARCHRESULTS'] = $SearchResults;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 		
 		return $NVPResponseArray;
@@ -1984,7 +1984,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $DNRCFieldsNVP . $CCDetailsNVP . $PayerNameNVP . $PayerInfoNVP . $BillingAddressNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -1994,7 +1994,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 		
 		return $NVPResponseArray;
@@ -2075,7 +2075,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $DRTFieldsNVP . $ShippingAddressNVP . $OrderItemsNVP . $CCDetailsNVP . $PayerInfoNVP . $BillingAddressNVP . $PaymentDetailsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2085,7 +2085,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 		
 		return $NVPResponseArray;
@@ -2111,7 +2111,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $GBFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2138,7 +2138,7 @@ class PayPal
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['BALANCERESULTS'] = $BalanceResults;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
 		return $NVPResponseArray;
@@ -2146,7 +2146,7 @@ class PayPal
 	}
 
 	/**
-	 * Obtain your Pal ID, which is the PayPal–assigned merchant account number, and other informaton about your account.
+	 * Obtain your Pal ID, which is the PayPalâ€“assigned merchant account number, and other informaton about your account.
 	 *
 	 * You need the encrypted account number when working with dynamic versions of PayPal buttons and logos.
 	 *
@@ -2159,7 +2159,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $GPFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2169,7 +2169,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;	
@@ -2194,7 +2194,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $AVFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2204,7 +2204,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2229,7 +2229,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $MPTSFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2239,7 +2239,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2344,7 +2344,7 @@ class PayPal
 			
 		$NVPRequest = $this->NVPCredentials . $CRPPFieldsNVP . $OrderItemsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2354,7 +2354,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;	
@@ -2379,7 +2379,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $GRPPDFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2389,7 +2389,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2414,7 +2414,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $MRPPSFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2424,7 +2424,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2461,7 +2461,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $BOAFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2471,7 +2471,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;	
@@ -2526,7 +2526,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $URPPFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2536,7 +2536,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;		
@@ -2582,7 +2582,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $CBAFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2592,7 +2592,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;	
@@ -2637,7 +2637,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $SCBAFieldsNVP . $BillingAgreementsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2647,7 +2647,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2673,7 +2673,7 @@ class PayPal
 			
 		$NVPRequest = $this->NVPCredentials . $GBACDFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2683,7 +2683,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 				
 		return $NVPResponseArray;
@@ -2708,7 +2708,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $BAUFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2718,7 +2718,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2751,7 +2751,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $SMCFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2761,7 +2761,7 @@ class PayPal
 
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2787,7 +2787,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $DMCPFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2797,7 +2797,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2830,7 +2830,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $SetAuthFlowParamFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2843,7 +2843,7 @@ class PayPal
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REDIRECTURL'] = $RedirectURL;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2862,7 +2862,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $GetAuthDetailsFieldsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2872,7 +2872,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -2893,7 +2893,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $GetAccessPermissionsDetailsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2920,7 +2920,7 @@ class PayPal
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['Permissions'] = $Permissions;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;	
@@ -2963,7 +2963,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $SetAccessPermissionsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -2987,7 +2987,7 @@ class PayPal
 		$NVPResponseArray['REDIRECTURL'] = $RedirectURL;
 		$NVPResponseArray['LOGOUTREDIRECTURL'] = $LogoutRedirectURL;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -3007,7 +3007,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $UpdateAcccessPermissionsNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -3017,7 +3017,7 @@ class PayPal
 		
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -3047,7 +3047,7 @@ class PayPal
 		
 		$NVPRequest = $this->NVPCredentials . $BMButtonSearchNVP;
 		$NVPResponse = $this->CURLRequest($NVPRequest);
-		$NVPRequestArray = $this->NVPToArray($NVPRequest);
+		$NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
 		$Errors = $this->GetErrors($NVPResponseArray);
@@ -3078,7 +3078,7 @@ class PayPal
 		$NVPResponseArray['ERRORS'] = $Errors;
 		$NVPResponseArray['SEARCHRESULTS'] = $SearchResults;
 		$NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 								
 		return $NVPResponseArray;
@@ -3139,7 +3139,7 @@ class PayPal
 
         $NVPRequest = $this->NVPCredentials . $BMCreateButtonNVP;
         $NVPResponse = $this->CURLRequest($NVPRequest);
-        $NVPRequestArray = $this->NVPToArray($NVPRequest);
+        $NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
         $NVPResponseArray = $this->NVPToArray($NVPResponse);
 
         $Errors = $this->GetErrors($NVPResponseArray);
@@ -3149,7 +3149,7 @@ class PayPal
 
         $NVPResponseArray['ERRORS'] = $Errors;
         $NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-        $NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+        $NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
         $NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
         return $NVPResponseArray;
@@ -3211,7 +3211,7 @@ class PayPal
 
         $NVPRequest = $this->NVPCredentials . $BMUpdateButtonNVP;
         $NVPResponse = $this->CURLRequest($NVPRequest);
-        $NVPRequestArray = $this->NVPToArray($NVPRequest);
+        $NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
         $NVPResponseArray = $this->NVPToArray($NVPResponse);
 
         $Errors = $this->GetErrors($NVPResponseArray);
@@ -3221,7 +3221,7 @@ class PayPal
 
         $NVPResponseArray['ERRORS'] = $Errors;
         $NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-        $NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+        $NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
         $NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
         return $NVPResponseArray;
@@ -3240,7 +3240,7 @@ class PayPal
 
         $NVPRequest = $this->NVPCredentials . $BMGetButtonDetailsNVP;
         $NVPResponse = $this->CURLRequest($NVPRequest);
-        $NVPRequestArray = $this->NVPToArray($NVPRequest);
+        $NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
         $NVPResponseArray = $this->NVPToArray($NVPResponse);
 
         $Errors = $this->GetErrors($NVPResponseArray);
@@ -3250,7 +3250,7 @@ class PayPal
 
         $NVPResponseArray['ERRORS'] = $Errors;
         $NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-        $NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+        $NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
         $NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
         return $NVPResponseArray;
@@ -3286,7 +3286,7 @@ class PayPal
 
         $NVPRequest = $this->NVPCredentials . $BMGetInventoryNVP;
         $NVPResponse = $this->CURLRequest($NVPRequest);
-        $NVPRequestArray = $this->NVPToArray($NVPRequest);
+        $NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
         $NVPResponseArray = $this->NVPToArray($NVPResponse);
 
         $Errors = $this->GetErrors($NVPResponseArray);
@@ -3296,7 +3296,7 @@ class PayPal
 
         $NVPResponseArray['ERRORS'] = $Errors;
         $NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-        $NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+        $NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
         $NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
         return $NVPResponseArray;
@@ -3321,7 +3321,7 @@ class PayPal
 
         $NVPRequest = $this->NVPCredentials . $BMManageButtonStatusNVP;
         $NVPResponse = $this->CURLRequest($NVPRequest);
-        $NVPRequestArray = $this->NVPToArray($NVPRequest);
+        $NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
         $NVPResponseArray = $this->NVPToArray($NVPResponse);
 
         $Errors = $this->GetErrors($NVPResponseArray);
@@ -3331,7 +3331,7 @@ class PayPal
 
         $NVPResponseArray['ERRORS'] = $Errors;
         $NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-        $NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+        $NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
         $NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
         return $NVPResponseArray;
@@ -3389,7 +3389,7 @@ class PayPal
         
         $NVPRequest = $this->NVPCredentials . $BMSetInventoryNVP;
         $NVPResponse = $this->CURLRequest($NVPRequest);
-        $NVPRequestArray = $this->NVPToArray($NVPRequest);
+        $NVPRequestArray = $this->NVPToArray($this->MaskAPIResult($NVPRequest));
         $NVPResponseArray = $this->NVPToArray($NVPResponse);
 
         $Errors = $this->GetErrors($NVPResponseArray);
@@ -3399,7 +3399,7 @@ class PayPal
 
         $NVPResponseArray['ERRORS'] = $Errors;
         $NVPResponseArray['REQUESTDATA'] = $NVPRequestArray;
-        $NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+        $NVPResponseArray['RAWREQUEST'] = $this->MaskAPIResult($NVPRequest);
         $NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 
         return $NVPResponseArray;

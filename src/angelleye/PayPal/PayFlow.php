@@ -200,7 +200,7 @@ class PayFlow extends PayPal
         $this->Logger($this->LogPath, 'PayFlowRequest', $this->MaskPayflowAPIResult($NVPRequest));
         $this->Logger($this->LogPath, 'PayFlowResponse', $NVPResponse);
 		
-		$NVPResponseArray['RAWREQUEST'] = $NVPRequest;
+		$NVPResponseArray['RAWREQUEST'] = $this->MaskPayflowAPIResult($NVPRequest);
 		$NVPResponseArray['RAWRESPONSE'] = $NVPResponse;
 		
 		return $NVPResponseArray;
