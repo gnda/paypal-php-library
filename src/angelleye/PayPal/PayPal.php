@@ -608,7 +608,7 @@ class PayPal
 	 * @return	string	$Response		Returns the raw HTTP response from PayPal.
 	 */
 	function CURLRequest($Request = "", $APIName = "", $APIOperation = "", $PrintHeaders = false)
-	{
+	{           
 		$curl = curl_init();
 				// curl_setopt($curl, CURLOPT_HEADER,TRUE);
 				curl_setopt($curl, CURLOPT_VERBOSE, $this->Sandbox);
@@ -636,7 +636,7 @@ class PayPal
 			}
 		}
 				
-		curl_close($curl);
+		curl_close($curl);               
 		return $Response;	
 	}
 	
@@ -1880,7 +1880,7 @@ class PayPal
 		}
 		
 		$NVPRequest = $this->NVPCredentials . $TSFieldsNVP . $PayerNameNVP;
-		$NVPResponse = $this->CURLRequest($NVPRequest);
+		$NVPResponse = $this->CURLRequest($NVPRequest);                
 		$NVPRequestArray = $this->NVPToArray($NVPRequest);
 		$NVPResponseArray = $this->NVPToArray($NVPResponse);
 		
@@ -1903,7 +1903,7 @@ class PayPal
 			$LAmt = isset($NVPResponseArray['L_AMT' . $n . '']) ? $NVPResponseArray['L_AMT' . $n . ''] : '';
 			$LFeeAmt = isset($NVPResponseArray['L_FEEAMT' . $n . '']) ? $NVPResponseArray['L_FEEAMT' . $n . ''] : '';
 			$LNetAmt = isset($NVPResponseArray['L_NETAMT' . $n . '']) ? $NVPResponseArray['L_NETAMT' . $n . ''] : '';
-			
+			$L_CURRENCYCODE = isset($NVPResponseArray['L_CURRENCYCODE' . $n . '']) ? $NVPResponseArray['L_CURRENCYCODE' . $n . ''] : '';
 			$CurrentItem = array(
 								'L_TIMESTAMP' => $LTimestamp, 
 								'L_TIMEZONE' => $LTimeZone, 
@@ -1914,7 +1914,8 @@ class PayPal
 								'L_STATUS' => $LStatus, 
 								'L_AMT' => $LAmt, 
 								'L_FEEAMT' => $LFeeAmt, 
-								'L_NETAMT' => $LNetAmt
+								'L_NETAMT' => $LNetAmt,
+                                                                'L_CURRENCYCODE' => $L_CURRENCYCODE
 								);
 																	
 			array_push($SearchResults, $CurrentItem);
