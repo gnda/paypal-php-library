@@ -9,7 +9,9 @@ $PayPalConfig = array(
 					'APISignature' => $api_signature, 
 					'PrintHeaders' => $print_headers,
                     'LogResults' => $log_results,
-                    'LogPath' => $log_path,					);
+                    'LogPath' => $log_path,
+                    'CurlOptVerbose' => $curl_opt_verbose
+    );
 
 $PayPal = new angelleye\PayPal\PayPal($PayPalConfig);
 

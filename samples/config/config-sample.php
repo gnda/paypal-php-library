@@ -44,6 +44,13 @@ if($sandbox)
 	error_reporting(E_ALL|E_STRICT);
 	ini_set('display_errors', '1');	
 }
+/*
+ *   CURL OPTION VERBOSE SETUP 
+ *   ------------------ 
+ *   Set true. if you want to add CURLOPT_VERBOSE in CURL Request.
+ *   Set false. if you don't want to add CURLOPT_VERBOSE in CURL Request.
+ */
+$curl_opt_verbose = true;
 
 /**
  * PayPal API Version

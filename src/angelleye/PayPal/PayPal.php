@@ -53,6 +53,7 @@ class PayPal
     var $PrintHeaders = '';
     var $LogResults = '';
     var $LogPath = '';
+    var $CurlOptVerbose = '';
 	
 	/**
 	 * Constructor
@@ -82,6 +83,7 @@ class PayPal
         $this->PrintHeaders = isset($DataArray['PrintHeaders']) ? $DataArray['PrintHeaders'] : false;
         $this->LogResults = isset($DataArray['LogResults']) ? $DataArray['LogResults'] : false;
         $this->LogPath = isset($DataArray['LogPath']) ? $DataArray['LogPath'] : '/logs/';
+        $this->CurlOptVerbose = isset($DataArray['CurlOptVerbose']) ? $DataArray['CurlOptVerbose'] : true;
 
 		if($this->Sandbox)
 		{
@@ -611,7 +613,9 @@ class PayPal
 	{
 		$curl = curl_init();
 				// curl_setopt($curl, CURLOPT_HEADER,TRUE);
-				curl_setopt($curl, CURLOPT_VERBOSE, $this->Sandbox);
+                if($this->CurlOptVerbose){                    
+                    curl_setopt($curl, CURLOPT_VERBOSE, $this->Sandbox);
+                }				
 				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 				curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 				curl_setopt($curl, CURLOPT_URL, $this->EndPointURL);
