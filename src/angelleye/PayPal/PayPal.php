@@ -1903,6 +1903,7 @@ class PayPal
 			$LAmt = isset($NVPResponseArray['L_AMT' . $n . '']) ? $NVPResponseArray['L_AMT' . $n . ''] : '';
 			$LFeeAmt = isset($NVPResponseArray['L_FEEAMT' . $n . '']) ? $NVPResponseArray['L_FEEAMT' . $n . ''] : '';
 			$LNetAmt = isset($NVPResponseArray['L_NETAMT' . $n . '']) ? $NVPResponseArray['L_NETAMT' . $n . ''] : '';
+			$LCurrencyCode = isset($NVPResponseArray['L_CURRENCYCODE' . $n . '']) ? $NVPResponseArray['L_CURRENCYCODE' . $n . ''] : '';
 			
 			$CurrentItem = array(
 								'L_TIMESTAMP' => $LTimestamp, 
@@ -1913,6 +1914,7 @@ class PayPal
 								'L_TRANSACTIONID' => $LTransID, 
 								'L_STATUS' => $LStatus, 
 								'L_AMT' => $LAmt, 
+								'L_CURRENCYCODE'=> $LCurrencyCode, 
 								'L_FEEAMT' => $LFeeAmt, 
 								'L_NETAMT' => $LNetAmt
 								);
